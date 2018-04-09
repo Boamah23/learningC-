@@ -1,0 +1,138 @@
+#include <iostream>
+#include <sstream>
+#include <string>
+#include <windows.h>
+#include <ctime>
+
+using namespace std;
+
+static const char pool[] =
+"0123456789"
+"!£$%@&*"
+"ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+"abcdefghijklmnopqrstuwxyz";
+
+int poolSize = sizeof(pool) - 1;
+
+char genRandom(){
+
+    return pool[rand() % poolSize];
+}
+
+class ageLimit{
+public:
+    int ageRestriction(){
+        cout << "In order for you to be eligible to the play this game\nboth players must meet the minimum age requirement" << endl;
+        cout << "\nplease enter age of the youngest player" << endl;
+        int a;
+        cin >> a;
+
+        if(a < 4){
+            cout << "Sorry you're not able to play this game" << endl;
+        }
+    }
+};
+
+int main(int argc, char *argv[])
+{
+    cout << "Do you currently have a usernames for this game?" << endl;
+    cout << "\nYES or NO" << endl;
+    string input = "";
+    cin >> input;
+    string YES = "YES";
+    string NO = "NO";
+
+    if(input == YES){
+        cout << "Player 1 enter your username" << endl;
+        cin >> input;
+        cout << "Player 2 enter your username" << endl;
+        cin >> input;
+        //recall name from database
+    }
+    if(input == NO){
+        cout << "Would you like an username?\nThis allows you to save your score on your profile" << endl;
+        cout << "\nOption 1: Yes I would like an username" << endl;
+        cout << "Option 2: continue to game" << endl;
+        cout << "\nBy selecting option 1 you will be given a randomly generated username" << endl;
+
+        int o;
+        cin >> o;
+
+        if(o < 2){
+            SetConsoleTitle("Random text string Generator");
+
+            srand(time(0));
+            std::string Str;
+
+            for(unsigned int i = 0; i < 8; ++i){
+            Str += genRandom();
+            }
+            cout <<"\nYour new username is " << Str << endl;
+            // Save username to database
+        }
+
+    }
+
+	string player1;
+	string player2;
+
+	cout << "\nPlayer 1 name:" << endl;
+	cin >> player1;
+	cout << "Player 2 name:" << endl;
+	cin >> player2;
+
+	cout << player1 << " and " << player2 << " selected, please wait\n" << endl;
+
+	ageLimit ageObject;
+	ageObject.ageRestriction();
+
+    string Yes;
+    string No;
+
+    cout << "\nWould you like the in instructions for this game?" << endl;
+    cout << "If Yes select 1" << endl;
+    cout << "If No select 0" << endl;
+
+    int x;
+    int y = 5;
+    cin >> x;
+
+
+        if(x = 1){
+
+            cout << "The rules for playing noughts and crosses are very simple." << endl;
+            cout << "Each player takes it in turn to place their X or O into one of the empty squares in the grid" << endl;
+            cout << "To win the game get three of your symbols in a line horizontally, vertically or diagonally." << endl;
+
+
+            } else{
+                     while(y >= 1){
+                    cout << "\nThe game will begin in " << y << endl;
+                y = y - 1;
+       }
+        }
+
+    cin.get();
+
+    cout << "\nWould you like to continue to the game?" << endl;
+    cout << "If Yes select 1" << endl;
+    cout << "If No select 0" << endl;
+
+    int a;
+    int b = 5;
+    cin >> a;
+
+         if(a > 0){
+                     while(b > 0){
+                    cout << "\nThe game will begin in " << b << endl;
+                    b = b - 1;
+                    cout << "\nInitialising Game....." << endl;
+
+                }
+         }
+
+
+//initialise the game after its been placed into a function name
+
+    return 0;
+}
