@@ -1,0 +1,223 @@
+#include <iostream>
+#include <sstream> // provides string stream classes
+#include <string>
+//#include "windows.h" // contains declarations for all of the functions in the Windows API
+#include <ctime> // converts time values to strings
+//#include "_mingw.h"
+#include "libsqlite.hpp"
+//#include "Database2.db"
+
+// The following code asks if players have usernames, if wished to the code randomly generates usernames
+// from a set of characters which will later on be saved to the database
+// The code then provides the users with option to read instructions and then initialises a countdown to begin the game
+
+using namespace std;
+    
+
+
+class countdown{
+    public:
+        int loopCountdown(){
+            
+            int b = 5;
+                     while(b > 0){
+                    cout << "\nThe game will begin in " << b << endl;
+                    b = b - 1;
+                    
+
+                }
+         cout << "\nInitialising Game....." << endl;
+         }
+        
+};
+
+static const char pool[] = //stores variables permanently
+"0123456789"
+"!£$%@&*"
+"ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+"abcdefghijklmnopqrstuwxyz";
+
+int poolSize = sizeof(pool) - 1;
+
+char genRandom(){
+
+    return pool[rand() % poolSize];
+}
+
+class ageLimit{
+public: // Access specifier
+    int ageRestriction(){
+        cout << "In order for you to be eligible to the play this game\nboth players must meet the minimum age requirement" << endl;
+        cout << "\nplease enter age of the youngest player" << endl;
+        int a;
+        cin >> a;
+
+        if(a < 4){
+            cout << "Sorry you're not able to play this game" << endl;
+        }
+    }
+};
+
+int main(int argc, char *argv[]) // passes command line arguments to main()
+{
+    cout << "Do you currently have usernames for this game?" << endl;
+    cout << "\nYES or NO" << endl;
+    string input = "";
+    cin >> input;
+    string YES = "YES";
+    string NO = "NO";
+
+    if(input == YES){
+        cout << "Player 1 enter your username" << endl;
+        cin >> input;
+        cout << "Player 2 enter your username" << endl;
+        cin >> input;
+        //recall name from database
+    }
+    if(input == NO){
+        cout << "Would you like an username?\nThis allows you to save your score on your profile" << endl;
+        cout << "\nOption 1: Yes I would like an username" << endl;
+        cout << "Option 2: continue to game" << endl;
+        cout << "\nBy selecting option 1 you will be given a randomly generated username" << endl;
+
+        int o;
+        cin >> o;
+
+        if(o < 2){
+// This function generates random characters from the pool
+            const char* SetConsoleTitle("Random text string Generator");
+            {
+            srand(time(0));
+            std::string Str;
+
+            for(unsigned int i = 0; i < 8; ++i){ // length of string
+            Str += genRandom();
+            }
+            cout <<"\nYour new username is " << Str << endl; // all characters can be called
+            cin >> Str;
+            
+   string sqlfile = "Database2.db";
+    sqlite::sqlite db (sqlfile); //creates connection to database
+    
+    try
+    {
+        auto cur = db.get_statement();
+        auto cur22 = db.get_statement();
+        auto cur3 = db.get_statement();
+        auto cur4 = db.get_statement();
+        
+        string username = Str;
+        cin >> Str;
+        
+        
+        
+        //checks if the username is taken by querying the database
+        cur4->set_sql("SELECT COUNT(Username) FROM PlayerStats WHERE Username = (?);");
+        cur4->prepare();
+        cur4->bind(1, username);
+        cur4->step();
+        
+        int usernamecheck = cur4->get_int(0); //equals 0 if username available, otherwise 1
+        
+        
+        if ( usernamecheck == 0)
+        {
+            cur = db.get_statement();
+            cur->set_sql("INSERT INTO PlayerStats (Player_Name, Username) VALUES (?, ?);");
+            
+            cur->prepare();
+            cur->bind(1, username);
+            cur->step();
+            
+            
+             
+            cur3 = db.get_statement();
+            cur3->set_sql("INSERT INTO PlayerStats (Username) VALUES(?);");
+             
+            cur3->prepare();  
+            cur3->bind(1,username);
+            cur3->step();
+            
+            cur22 = db.get_statement();
+            cur22->set_sql("INSERT INTO Stats (Username) SELECT (Username) FROM PlayerStats WHERE Username = (?);");
+            cur22->prepare();
+            cur22->bind(1, username);
+            cur22->step();
+            
+            
+            
+        }
+
+        else {}
+        
+        
+    }
+    catch( sqlite::exception e )
+    {
+        cerr << e.what() << endl;
+        return 1;
+    }
+             
+            }
+        }
+
+    }
+
+	string player1;
+	string player2;
+
+	cout << "\nPlayer 1 name:" << endl;
+	cin >> player1;
+	cout << "Player 2 name:" << endl;
+	cin >> player2;
+
+	cout << player1 << " and " << player2 << " selected, please wait\n" << endl;
+
+	ageLimit ageObject;
+	ageObject.ageRestriction(); // Accesses function within class
+
+    string Yes;
+    string No;
+
+    cout << "\nWould you like the in instructions for this game?" << endl;
+    cout << "If Yes select 1" << endl;
+    cout << "If No select 0" << endl;
+
+    int x;
+    int y = 5;
+    cin >> x;
+
+
+        if(x >= 1){
+
+            cout << "The rules for playing noughts and crosses are very simple." << endl;
+            cout << "Each player takes it in turn to place their X or O into one of the empty squares in the grid" << endl;
+            cout << "To win the game get three of your symbols in a line horizontally, vertically or diagonally." << endl;
+
+
+            } else{
+                     while(y >= 1){
+                    cout << "\nThe game will begin in " << y << endl;
+                y = y - 1; // Loops function, subtracting 1 for every loop
+       }
+        }
+
+    cin.get(); // Waits for user input
+
+    cout << "\nWould you like to continue to the game?" << endl;
+    cout << "If Yes select 1" << endl;
+    cout << "If No select 0" << endl;
+
+    int a;
+    cin >> a;
+
+         if(a > 0){
+             countdown loopObject;
+             loopObject.loopCountdown();
+         }
+
+
+// Initialise the game after its been placed into a function name
+
+    return 0;
+}
