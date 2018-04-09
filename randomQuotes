@@ -1,0 +1,21 @@
+#include <iostream>
+
+using namespace std;
+
+class randomClass{
+  public:
+    void randomQuotes(){
+    cout << "Oh you think darkness is your ally?\n";
+    cout << "I was born in it\n";
+    cout << "Moulded by it\n";
+    cout << "I didn't see the light of day until I was a mere man\n";
+    cout << "The shadows betray you because they belong to me!\n";
+    }
+
+};
+
+int main(){
+  randomClass randomObject;
+  randomObject.randomQuotes();
+  return 0;
+}
