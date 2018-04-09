@@ -1,0 +1,65 @@
+#include <iostream>
+#include <sstream>
+#include <string>
+
+using namespace std;
+
+int main()
+{
+	string player1;
+	string player2;
+
+	cout << "Player 1:" << endl;
+	getline(cin, player1);
+	cout << "Player 2:" << endl;
+	getline(cin, player2);
+
+	cout << player1 << " and " << player2 << " selected, please wait" << endl;
+	
+    string Yes;
+    string No;
+   
+    cout << "Would you like the in instructions for this game?" << endl;
+    cout << "If Yes select 1" << endl;
+    cout << "If No select 0" << endl;
+    
+    int x; 
+    int y = 5;
+    cin >> x;
+    
+    
+        if(x > 0){
+            
+            cout << "The rules for playing noughts and crosses are very simple." << endl; 
+            cout << "Each player takes it in turn to place their X or O into one of the empty squares in the grid by clicking on it." << endl;
+            cout << "To win the game get three of your symbols in a line horizontally, vertically or diagonally. For the first game, X begins." << endl;
+       
+     
+            } else{
+                     while(y >= 1){
+                    cout << "The game will begin in " << y << endl;
+                y = y - 1;
+       }
+        }
+       
+    cin.get();
+    
+    cout << "\nWould you like to continue to the game?" << endl;
+    cout << "If Yes select 1" << endl;
+    cout << "If No select 0" << endl;
+            
+    int a;
+    int b = 5;
+    cin >> a;
+    
+         if(a > 0){
+                     while(b >= 1){
+                    cout << "The game will begin in " << b << endl;
+                b = b - 1; 
+         }   
+         }
+    
+    \\ initialise the game after its been placed into a function name 
+    
+    return 0;
+}
