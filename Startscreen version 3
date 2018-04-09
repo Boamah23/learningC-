@@ -36,7 +36,7 @@ class ageLimit{
         if(a < 4){
             cout << "Sorry you're not able to play this game" << endl;
         }
-    }
+    } 
 };
 
 int main(int argc, char *argv[]) //passes command line arguments to main()
